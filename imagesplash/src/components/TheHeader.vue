@@ -68,6 +68,12 @@ export default {
 };
 </script>
 <style scoped>
+.the-nav{
+  position: fixed;
+  width:100%;
+  z-index: 2;
+  background-color: #fff  !important;
+}
 .closed {
   border: none !important;
 }
@@ -107,6 +113,8 @@ export default {
   border-right: none;
   border-color: rgb(218, 218, 218);
   background-color: #fff;
+  position: relative;
+  z-index: -1;
 }
 .btn-search:hover {
   background: #eee;

@@ -53,21 +53,26 @@ export default {
   flex-wrap: wrap;
 }
 .img-box div {
-  flex: 1 1 450px !important;
+  
+  flex: 1 1 400px !important;
+  
+  border: dotted;
+  
+  
 }
 img {
-  width: 100%;
-  object-fit: cover;
+  max-width: 100%;
+  height: auto;
+  
   display: block;
+  
 }
 
 .row {
   border: dotted;
   padding: 0;
 }
-.imgs {
-  border: dotted;
-}
+
 @media only screen and (max-width: 650px) {
   .imgs {
     flex-wrap: wrap;
