@@ -1,7 +1,18 @@
 <template>
-  <div class="img-box d-flex">
-    <div v-for="imgs in img" :key="imgs.id" class="column">
-      <img :src="imgs.download_url" alt="" srcset="" />
+  <div>
+    <div class="img-box">
+      <masonry
+        :cols="{ default: 3, 975: 2, 750: 1 }"
+        :gutter="{ default: '25px', 700: '15px' }"
+      >
+        <div v-for="(imgs, index) in img" :key="index" class="masonry">
+          <img :src="imgs.download_url" alt="" srcset="" />
+        </div>
+      </masonry>
+      <div
+        v-if="img.length"
+        v-observe-visibility="handleScrolledToBottom"
+      ></div>
     </div>
   </div>
 </template>
@@ -12,70 +23,56 @@ export default {
   data() {
     return {
       img: [],
+      page: 1,
     };
   },
+
   methods: {
     async showData() {
       try {
         const res = await axios.get(
-          "https://picsum.photos/v2/list?page=3&limit=25"
+          `https://picsum.photos/v2/list?page=${this.page}&limit=5`
         );
         console.log(res);
         const data = res.data;
-        let resultArray = [];
-        for (let key in data) {
-          const info = data[key];
-          info.id = key;
-          resultArray.push(info);
-        }
-        this.img = resultArray;
+
+        this.img.push(...data);
         console.log(this.img);
       } catch (err) {
         console.log("could not get imgs : " + err);
       }
     },
+    handleScrolledToBottom(isVisible) {
+      if (!isVisible) {
+        return;
+      } else {
+        console.log("abc");
+        this.page++;
+        this.showData();
+      }
+    },
   },
-  created: function () {
+  mounted() {
     this.showData();
   },
 };
 </script>
 
 <style scoped>
-.column {
-  padding: 15px;
+.masonry img {
+  width: 100%;
+  margin-top: 25px;
 }
+
 .img-box {
-  max-width: 1350px;
+  max-width: 1500px;
   margin: 0 auto;
-  display: flex !important;
-  padding-top: 15px;
-  flex-wrap: wrap;
 }
-.img-box div {
-  
-  flex: 1 1 400px !important;
-  
-  border: dotted;
-  
-  
-}
-img {
+
+.column img {
   max-width: 100%;
   height: auto;
-  
+
   display: block;
-  
-}
-
-.row {
-  border: dotted;
-  padding: 0;
-}
-
-@media only screen and (max-width: 650px) {
-  .imgs {
-    flex-wrap: wrap;
-  }
 }
 </style>

@@ -6,7 +6,7 @@
         <div class="banner-content">
           <div class="title">
             <h1 class="mb-3">ImageSplash</h1>
-            The internet’s source of <a href="">freely-usable images.</a> 
+            The internet’s source of <a href="">freely-usable images.</a>
             <p>Powered by creators everywhere..</p>
             <b-input-group class="inp-group">
               <b-input-group-prepend class="search-box">
@@ -111,12 +111,12 @@ a:hover {
   height: 50px;
 }
 .wrapper {
-  background-image:linear-gradient( rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3) ), url("../assets/maxim-tolchinskiy-S2IRzIk88Nw-unsplash.jpg");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    url("../assets/maxim-tolchinskiy-S2IRzIk88Nw-unsplash.jpg");
   background-repeat: no-repeat;
   background-size: cover; /* <------ */
   background-position: center center;
   height: auto;
-  
 }
 .banner-wrapper {
   height: 90vh;
@@ -132,19 +132,23 @@ a:hover {
   font-weight: bold;
   color: #fff;
 }
-.title a{
+.title a {
   color: rgb(231, 231, 231);
-  text-decoration: underline  ;
+  text-decoration: underline;
 }
 .title {
   color: #fff;
+}
+.inp-group {
+  position: relative;
+  z-index: 1;
 }
 @media only screen and (max-width: 690px) {
   .title h1 {
     font-size: 24px;
     padding-top: 45px;
   }
-  .title p{
+  .title p {
     margin-bottom: 25px;
   }
   .title {
@@ -170,7 +174,6 @@ a:hover {
     padding-top: 75px;
     height: 100%;
   }
- 
 }
 @media only screen and (max-width: 875px) {
   .license {
