@@ -12,14 +12,17 @@
         <img
           class="preview"
           v-progressive="imgs.download_url"
+          v-lazy="imgs.download_url"
           :data-srcset="imgs.download_url"
           :src="imgs.download_url"
           alt=""
         />
       </div>
+      <div
+        v-if="img.length"
+        v-observe-visibility="handleScrolledToBottom"
+      ></div>
     </masonry>
-
-    <div v-if="img.length" v-observe-visibility="handleScrolledToBottom"></div>
   </div>
 </template>
 <script>
@@ -80,7 +83,7 @@ export default {
 }
 
 .img-box {
-  max-width: 1500px;
+  max-width: 1300px;
   margin: 26px auto;
 
   padding: 0px;
