@@ -119,7 +119,7 @@ a:hover {
   height: auto;
 }
 .banner-wrapper {
-  height: 90vh;
+  height: 65vh;
 }
 .banner-content {
   width: 100%;

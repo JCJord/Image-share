@@ -22,11 +22,15 @@
             :src="imgs.download_url"
             alt=""
           />
+          <div class="download-icon-img">
+            <h4>Nature</h4>
+            <a :href="imgs.url + downloadUrl">Download</a>
+          </div>
         </div>
         <div class="download-box">
           <b-button
             variant="outline-secondary"
-            :href="imgs.url"
+            :href="imgs.url + downloadUrl"
             class="btn-down"
             >Download</b-button
           >
@@ -45,7 +49,7 @@ import axios from "axios";
 export default {
   data() {
     return {
-      downloadUrl: "download?force=true",
+      downloadUrl: "/download?force=true",
       img: [],
       page: 5,
       isLoaded: false,
@@ -57,7 +61,7 @@ export default {
     async showData() {
       try {
         const res = await axios.get(
-          `https://picsum.photos/v2/list?page=${this.page}&limit=10`
+          `https://picsum.photos/v2/list/?page=${this.page}&limit=10/200`
         );
 
         console.log(res);
@@ -88,6 +92,27 @@ export default {
 </script>
 
 <style scoped>
+.download-icon-img {
+  display: block;
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background-color: black;
+  color: white;
+  padding-left: 20px;
+  padding-right: 20px;
+  z-index: 999;
+}
+
+.masonry:hover + .download-icon-img {
+  display: block;
+  cursor: pointer;
+}
+
+.preview:hover + .download-icon-img {
+  display: block;
+  color: green;
+}
 .author-box {
   display: none !important;
 }
