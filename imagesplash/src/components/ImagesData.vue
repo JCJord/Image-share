@@ -93,7 +93,7 @@ export default {
 
 <style scoped>
 .download-icon-img {
-  display: block;
+  display: none;
   position: absolute;
   bottom: 20px;
   right: 20px;
