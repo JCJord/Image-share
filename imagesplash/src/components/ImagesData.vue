@@ -36,6 +36,23 @@ export default {
   },
 
   methods: {
+    async showData() {
+      try {
+        const res = await axios.get(
+          `https://picsum.photos/v2/list?page=${this.page}&limit=10`
+        );
+
+        console.log(res);
+        const data = res.data;
+
+        this.img.push(...data);
+
+        console.log(this.img);
+      } catch (err) {
+        console.log("could not get imgs : " + err);
+      }
+    },
+
     handleScrolledToBottom(isVisible) {
       if (!isVisible) {
         return;
@@ -45,14 +62,7 @@ export default {
       }
     },
   },
-  created() {
-    axios
-      .get(`https://picsum.photos/v2/list?page=${this.page}&limit=10`)
-      .then((res) => {
-        const data = res.data;
-        this.img.push(...data);
-      });
-  },
+
   mounted() {
     this.showData();
   },
@@ -61,12 +71,11 @@ export default {
 
 <style scoped>
 .progressive {
-  margin-top: 15px;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 .masonry img {
   width: 100%;
-  margin-top: 20px;
+
   padding: 0;
 }
 
