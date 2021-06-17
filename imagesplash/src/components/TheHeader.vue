@@ -68,11 +68,11 @@ export default {
 };
 </script>
 <style scoped>
-.the-nav{
+.the-nav {
   position: fixed;
-  width:100%;
+  width: 100%;
   z-index: 2;
-  background-color: #fff  !important;
+  background-color: #fff !important;
 }
 .closed {
   border: none !important;
@@ -143,7 +143,7 @@ export default {
   display: none;
   width: 20px;
   height: 2px;
-  background-color: black;
+  background-color: rgb(141, 141, 141);
   margin: 3px 0;
   border-radius: 20px;
   cursor: pointer;

@@ -4,19 +4,33 @@
       :cols="{ default: 3, 975: 2, 750: 1 }"
       :gutter="{ default: '25px', 700: '10px' }"
     >
-      <div
-        v-for="(imgs, index) in img"
-        :key="index"
-        class="progressive masonry"
-      >
-        <img
-          class="preview"
-          v-progressive="imgs.download_url"
-          v-lazy="imgs.download_url"
-          :data-srcset="imgs.download_url"
-          :src="imgs.download_url"
-          alt=""
-        />
+      <div v-for="(imgs, index) in img" :key="index" class="masonry">
+        <div class="author-box d-flex">
+          <b-avatar
+            variant="primary"
+            class="prof"
+            :src="imgs.download_url"
+          ></b-avatar>
+          <p>{{ imgs.author }}</p>
+        </div>
+        <div class="casulo progressive">
+          <img
+            class="preview"
+            v-progressive="imgs.download_url"
+            v-lazy="imgs.download_url"
+            :data-srcset="imgs.download_url"
+            :src="imgs.download_url"
+            alt=""
+          />
+        </div>
+        <div class="download-box">
+          <b-button
+            variant="outline-secondary"
+            :href="imgs.url"
+            class="btn-down"
+            >Download</b-button
+          >
+        </div>
       </div>
       <div
         v-if="img.length"
@@ -31,6 +45,7 @@ import axios from "axios";
 export default {
   data() {
     return {
+      downloadUrl: "download?force=true",
       img: [],
       page: 5,
       isLoaded: false,
@@ -73,6 +88,13 @@ export default {
 </script>
 
 <style scoped>
+.author-box {
+  display: none !important;
+}
+.download-box {
+  display: none;
+}
+
 .progressive {
   margin-bottom: 20px;
 }
@@ -95,30 +117,47 @@ export default {
 
   display: block;
 }
-.masonry {
-}
-.lds-dual-ring {
-  display: inline-block;
-  width: 80px;
-  height: 80px;
-}
-.lds-dual-ring:after {
-  content: " ";
-  display: block;
-  width: 64px;
-  height: 64px;
-  margin: 8px;
-  border-radius: 50%;
-  border: 6px solid #fff;
-  border-color: #fff transparent #fff transparent;
-  animation: lds-dual-ring 1.2s linear infinite;
-}
-@keyframes lds-dual-ring {
-  0% {
-    transform: rotate(0deg);
+
+@media only screen and (max-width: 750px) {
+  .btn-down {
+    float: right;
+    border: rgb(184, 184, 184) 1px solid !important;
+    font-size: 14px;
+    margin-right: 10px;
+    margin-top: 15px;
+    color: rgb(80, 80, 80) !important;
+    margin-bottom: 28px;
   }
-  100% {
-    transform: rotate(360deg);
+  .btn-down:hover {
+    color: cornsilk !important;
+  }
+  .download-box {
+    display: inline;
+  }
+  .author-box {
+    display: flex !important;
+    height: auto;
+    width: 100%;
+    padding-bottom: 1px;
+  }
+  .prof {
+    margin-top: 15px;
+    margin-left: 10px;
+    width: 32px;
+    height: 32px;
+  }
+  .author-box p {
+    font-size: 14px;
+    margin-left: 10px;
+    margin-top: 20px;
+    color: #000;
+    font-weight: bold;
+  }
+  .img-box {
+    margin: 50px auto;
+  }
+  .progressive {
+    margin-bottom: 0px;
   }
 }
 </style>
