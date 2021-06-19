@@ -10,22 +10,36 @@
             <p>Powered by creators everywhere..</p>
             <b-input-group class="inp-group">
               <b-input-group-prepend class="search-box">
-                <b-button class="btn-search"
+                <b-button class="btn-search" @click="submitSearch"
                   ><i class="fas fa-search"></i
                 ></b-button>
               </b-input-group-prepend>
 
               <b-form-input
                 type="text"
-                placeholder="Search free high-resolution photos"
+                placeholder="Search free high-resolution photos by author"
+                @keyup.enter="submitSearch"
                 class="inp"
+                v-model="search"
+                required
               ></b-form-input>
             </b-input-group>
             <div class="trending">
               <div class="trending-links">
-                Trending: <a href="">flowers</a> , <a href="">backgrounds</a>,
-                <a href="">wallpapers</a>, <a href="">happy</a>,
-                <a href="">love</a>
+                Trending:
+                <router-link to="/search/Alejandro Escamilla"
+                  >Alejandro Escamilla</router-link
+                >
+                ,
+                <router-link to="/search/Paul Jarvis">Paul Jarvis </router-link
+                >,
+                <router-link to="/search/Danielle MacInnes"
+                  >Danielle MacInnes</router-link
+                >,
+                <router-link to="/search/Greg Rakozy">Greg Rakozy</router-link>,
+                <router-link to="/search/Samantha Sophia"
+                  >Samantha Sophia</router-link
+                >
               </div>
             </div>
           </div>
@@ -43,20 +57,35 @@
         <p class="dev">Developed by JcJord</p>
       </div>
     </div>
+
     <images-data> </images-data>
   </div>
 </template>
 
 <script>
-import ImagesData from "../components/ImagesData.vue";
+import ImagesData from "../components/service/ImagesData.vue";
 // @ is an alias to /src
-import TheHeader from "../components/TheHeader.vue";
+import TheHeader from "../components/header/TheHeader.vue";
+import router from "../router/index.js";
 export default {
   components: { TheHeader, ImagesData },
+  data() {
+    return {
+      search: "",
+    };
+  },
+  methods: {
+    submitSearch() {
+      router.push({ path: `search/${this.search}` });
+    },
+  },
 };
 </script>
 
 <style scoped>
+.teste {
+  border: dotted;
+}
 .author {
   margin-left: 10px;
 }

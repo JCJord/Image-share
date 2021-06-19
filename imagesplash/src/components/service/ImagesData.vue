@@ -3,6 +3,8 @@
     <masonry
       :cols="{ default: 3, 975: 2, 750: 1 }"
       :gutter="{ default: '25px', 700: '10px' }"
+      class="mass"
+      v-if="this.$route.path === '/'"
     >
       <div v-for="(imgs, index) in img" :key="index" class="masonry">
         <div class="author-box d-flex">
@@ -22,15 +24,58 @@
             :src="imgs.download_url"
             alt=""
           />
-          <div class="download-icon-img">
-            <h4>Nature</h4>
-            <a :href="imgs.url + downloadUrl">Download</a>
-          </div>
+
+          <a :href="imgs.url + downloadUrl" class="download-icon-img">
+            <i class="fas fa-arrow-down"></i>
+          </a>
         </div>
         <div class="download-box">
           <b-button
             variant="outline-secondary"
             :href="imgs.url + downloadUrl"
+            class="btn-down"
+            >Download</b-button
+          >
+        </div>
+      </div>
+      <div
+        v-if="img.length"
+        v-observe-visibility="handleScrolledToBottom"
+      ></div>
+    </masonry>
+    <masonry
+      v-else
+      :cols="{ default: 3, 975: 2, 750: 1 }"
+      :gutter="{ default: '25px', 700: '10px' }"
+      class="mass"
+    >
+      <div v-for="items in filteredArr" :key="items.id" class="masonry">
+        <li>{{ items.author }}</li>
+        <div class="author-box d-flex">
+          <b-avatar
+            variant="primary"
+            class="prof"
+            :src="items.download_url"
+          ></b-avatar>
+          <p>{{ items.author }}</p>
+        </div>
+        <div class="casulo progressive">
+          <img
+            class="preview"
+            :src="items.download_url"
+            :data-srcset="items.download_url"
+            v-lazy="items.download_url"
+            v-progressive="items.download_url"
+            alt=""
+          />
+          <a :href="items.url + downloadUrl" class="download-icon-img">
+            <i class="fas fa-arrow-down"></i>
+          </a>
+        </div>
+        <div class="download-box">
+          <b-button
+            variant="outline-secondary"
+            :href="items.url + downloadUrl"
             class="btn-down"
             >Download</b-button
           >
@@ -47,13 +92,12 @@
 import axios from "axios";
 
 export default {
+  props: ["filteredArr", "arr"],
   data() {
     return {
       downloadUrl: "/download?force=true",
       img: [],
       page: 5,
-      isLoaded: false,
-      isLoading: false,
     };
   },
 
@@ -64,12 +108,9 @@ export default {
           `https://picsum.photos/v2/list/?page=${this.page}&limit=10/200`
         );
 
-        console.log(res);
         const data = res.data;
 
         this.img.push(...data);
-
-        console.log(this.img);
       } catch (err) {
         console.log("could not get imgs : " + err);
       }
@@ -83,6 +124,9 @@ export default {
         this.showData();
       }
     },
+    searchContent() {
+      this.$emit("searchContent", this.img);
+    },
   },
 
   mounted() {
@@ -92,27 +136,47 @@ export default {
 </script>
 
 <style scoped>
+.fa-arrow-down {
+  color: rgb(78, 78, 78);
+  position: absolute;
+  left: 31%;
+  right: 0;
+  top: 23%;
+  bottom: 0;
+}
+
+.download-icon-img:hover .fa-arrow-down {
+  color: black;
+  transition: 0.5s ease;
+}
+
 .download-icon-img {
-  display: none;
+  visibility: hidden;
   position: absolute;
   bottom: 20px;
+  width: 20px;
+  height: 30px;
+  border-radius: 5px;
+  cursor: pointer;
   right: 20px;
-  background-color: black;
+  padding: 2px;
+  background-color: #eee;
   color: white;
   padding-left: 20px;
   padding-right: 20px;
-  z-index: 999;
+
+  z-index: 1;
 }
 
-.masonry:hover + .download-icon-img {
-  display: block;
+.masonry:hover .download-icon-img {
+  cursor: pointer;
+  visibility: visible;
+  color: #000;
+}
+.masonry:hover {
   cursor: pointer;
 }
 
-.preview:hover + .download-icon-img {
-  display: block;
-  color: green;
-}
 .author-box {
   display: none !important;
 }
@@ -125,7 +189,7 @@ export default {
 }
 .masonry img {
   width: 100%;
-
+  cursor: pointer;
   padding: 0;
 }
 
@@ -136,14 +200,16 @@ export default {
   padding: 0px;
 }
 
-.column img {
-  max-width: 100%;
-  height: auto;
-
-  display: block;
-}
-
 @media only screen and (max-width: 750px) {
+  li {
+    visibility: hidden;
+  }
+  .download-icon-img {
+    visibility: hidden !important;
+  }
+  .masonry {
+    cursor: initial !important;
+  }
   .btn-down {
     float: right;
     border: rgb(184, 184, 184) 1px solid !important;

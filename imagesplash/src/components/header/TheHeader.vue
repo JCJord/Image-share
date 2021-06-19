@@ -3,26 +3,43 @@
     <b-navbar toggleable type="light" variant="light" class="the-nav"
       ><div class="form-gather d-flex">
         <div class="brand-box">
-          <b-navbar-brand href="#" class="text-black font-weight-bold brand"
-            >ImageSplash
+          <b-navbar-brand href="#" class="text-black font-weight-bold brand">
+            <router-link to="/" class="linkz">ImageSplash</router-link>
           </b-navbar-brand>
           <b-navbar-brand href="#" class="text-black font-weight-bold brand-cut"
             >ImgS
           </b-navbar-brand>
         </div>
         <b-input-group class="inp-group">
-          <b-input-group-prepend class="search-box">
+          <b-input-group-prepend class="search-box" @click="submitSearch">
             <b-button class="btn-search"
               ><i class="fas fa-search"></i
             ></b-button>
           </b-input-group-prepend>
 
-          <b-form-input type="text" class="inp"></b-form-input>
+          <b-form-input
+            type="text"
+            class="inp"
+            v-model="search"
+            @keyup.enter="submitSearch"
+          ></b-form-input>
         </b-input-group>
         <div class="link-group">
-          <a href="" class="link">Brands</a>
-          <a href="" class="link">Explore</a>
-          <a href="" class="link">Hiring</a>
+          <a
+            href="https://www.linkedin.com/in/jc-jord/"
+            target="_blank"
+            class="link"
+            >Linkedin</a
+          >
+          <a href="https://github.com/JCJord" target="_blank" class="link"
+            >GitHub</a
+          >
+          <a
+            href="https://jcjord.github.io/portfolio/"
+            target="_blank"
+            class="link"
+            >Portfolio</a
+          >
         </div>
       </div>
 
@@ -33,8 +50,16 @@
       </span>
 
       <div class="button-group">
-        <button class="btn btn-login">Login</button>
-        <button class="btn btn-success">Join Free</button>
+        <a
+          class="btn btn-login"
+          href="https://jcjord.github.io/portfolio/"
+          target="_blank"
+        >
+          Projects
+        </a>
+        <button class="btn btn-success">
+          <router-link to="/" class="search-link">Search</router-link>
+        </button>
       </div>
     </b-navbar>
     <div id="mySidenav" :class="styleOnClick" class="sidenav">
@@ -49,11 +74,19 @@
   </div>
 </template>
 <script>
+import router from "../../router/index";
 export default {
   data() {
-    return { isActive: false };
+    return { isActive: false, search: "" };
   },
   methods: {
+    submitSearch() {
+      if (this.$route.name === "Search") {
+        router.push({ path: `${this.search}` });
+      } else {
+        router.push({ path: `search/${this.search}` });
+      }
+    },
     toggleNav() {
       this.isActive = !this.isActive;
     },
@@ -68,6 +101,10 @@ export default {
 };
 </script>
 <style scoped>
+.search-link {
+  text-decoration: none;
+  color: #fff !important;
+}
 .the-nav {
   position: fixed;
   width: 100%;
@@ -120,6 +157,9 @@ export default {
   background: #eee;
   color: rgb(138, 138, 138);
   border-color: #fff;
+}
+.btn-search {
+  z-index: 111;
 }
 .inp {
   border-top-right-radius: 24px !important;
@@ -184,6 +224,10 @@ export default {
   right: 25px;
   font-size: 36px;
   margin-left: 50px;
+}
+.linkz {
+  text-decoration: none;
+  color: #000;
 }
 
 @media screen and (max-height: 450px) {
