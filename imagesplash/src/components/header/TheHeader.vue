@@ -6,8 +6,11 @@
           <b-navbar-brand href="#" class="text-black font-weight-bold brand">
             <router-link to="/" class="linkz">ImageSplash</router-link>
           </b-navbar-brand>
-          <b-navbar-brand href="#" class="text-black font-weight-bold brand-cut"
-            >ImgS
+          <b-navbar-brand
+            href="#"
+            class="text-black font-weight-bold brand-cut"
+          >
+            <router-link to="/" class="brand-cut">ImgS</router-link>
           </b-navbar-brand>
         </div>
         <b-input-group class="inp-group">
@@ -66,10 +69,17 @@
       <a href="javascript:void(0)" class="closebtn" @click="toggleNav"
         >&times;</a
       >
-      <a href="#">About</a>
-      <a href="#">Services</a>
-      <a href="#">Clients</a>
-      <a href="#">Contact</a>
+      <router-link to="/">Home</router-link>
+      <a href="https://github.com/JCJord" target="_blank">GitHub</a>
+      <a href="https://jcjord.github.io/portfolio/" target="_blank"
+        >Portfolio</a
+      >
+      <a
+        href="https://github.com/JCJord/Image-share"
+        class="btn btn-default repo"
+        target="_blank"
+        >Repository</a
+      >
     </div>
   </div>
 </template>
@@ -182,8 +192,8 @@ export default {
 .burger div {
   display: none;
   width: 20px;
-  height: 2px;
-  background-color: rgb(141, 141, 141);
+  height: 3px;
+  background-color: rgb(107, 107, 107);
   margin: 3px 0;
   border-radius: 20px;
   cursor: pointer;
@@ -198,7 +208,7 @@ export default {
   z-index: 99999;
   top: 0;
   right: 0;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(61, 61, 61);
   overflow-x: hidden;
   transition: 0.5s;
   padding-top: 60px;
@@ -206,12 +216,23 @@ export default {
 }
 
 .sidenav a {
-  padding: 8px 8px 8px 32px;
+  padding: 8px 8px 10px 20px;
   text-decoration: none;
-  font-size: 25px;
-  color: #000000;
+  font-size: 20px;
+  color: #fff;
   display: block;
   transition: 0.3s;
+  border-top: 1px solid;
+  font-weight: bold;
+}
+.sidenav a:first-child {
+  border-top: none;
+}
+.sidenav a:last-child {
+  border-bottom: 1px solid;
+  padding: 5px;
+  font-size: 14px;
+  color: #000 !important;
 }
 
 .sidenav a:hover {
@@ -225,9 +246,24 @@ export default {
   font-size: 36px;
   margin-left: 50px;
 }
+.repo {
+  position: absolute;
+  left: 10%;
+  margin-top: 10px;
+  width: 80%;
+  background-color: #fff;
+  color: #000;
+  border-color: rgb(0, 0, 0);
+  border-radius: 6px;
+  font-size: 15px;
+}
 .linkz {
   text-decoration: none;
   color: #000;
+}
+.brand-cut {
+  color: #000;
+  text-decoration: none;
 }
 
 @media screen and (max-height: 450px) {

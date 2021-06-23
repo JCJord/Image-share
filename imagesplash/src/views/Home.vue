@@ -64,7 +64,7 @@
 
 <script>
 import ImagesData from "../components/service/ImagesData.vue";
-// @ is an alias to /src
+
 import TheHeader from "../components/header/TheHeader.vue";
 import router from "../router/index.js";
 export default {

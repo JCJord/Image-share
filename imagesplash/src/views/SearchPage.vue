@@ -1,5 +1,6 @@
 <template>
   <div class="wrapper">
+    <pre-loader></pre-loader>
     <the-header></the-header>
     <div class="container mainc">
       <h1>{{ data }}</h1>
@@ -10,12 +11,14 @@
 <script>
 import TheHeader from "../components/header/TheHeader.vue";
 import ImagesData from "../components/service/ImagesData.vue";
+import PreLoader from "../components/pre-loader/PreLoader.vue";
 import axios from "axios";
 
 export default {
   components: {
     TheHeader,
     ImagesData,
+    PreLoader,
   },
   props: {
     data: {
@@ -48,7 +51,7 @@ export default {
       });
     },
   },
-  mounted() {
+  created() {
     this.fetchData();
   },
 };
