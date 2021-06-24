@@ -32,7 +32,9 @@ export default {
   methods: {
     async fetchData() {
       try {
-        const res = await axios.get(`https://picsum.photos/v2/list/`);
+        const res = await axios.get(
+          `https://picsum.photos/v2/list?page=1&limit=40`
+        );
 
         const data = res.data;
 

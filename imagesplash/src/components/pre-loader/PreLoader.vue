@@ -7,24 +7,7 @@
 </template>
 
 <script>
-export default {
-  data() {
-    return {
-      show: true,
-    };
-  },
-  methods: {
-    hideLoader() {
-      setTimeout(() => {
-        this.show = false;
-      }, 1000);
-    },
-  },
-
-  mounted() {
-    this.hideLoader();
-  },
-};
+export default {};
 </script>
 <style scoped>
 .pre-loader {

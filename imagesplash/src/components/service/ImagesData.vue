@@ -101,7 +101,7 @@ export default {
     return {
       downloadUrl: "/download?force=true",
       img: [],
-      page: 5,
+      page: 2,
     };
   },
 
