@@ -1,5 +1,5 @@
 <template>
-  <div v-if="show" class="text-center pre-loader">
+  <div class="text-center pre-loader">
     <div class="spinner-border" role="status">
       <span class="sr-only">Loading...</span>
     </div>
@@ -32,17 +32,11 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  position: fixed;
+
   width: 100%;
   height: 100%;
+  position: absolute;
   background: #fff;
-
-  height: 100%;
-  top: 0%;
-  bottom: 0%;
-  left: 0%;
-  right: 0%;
-  overflow: auto;
-  z-index: 999999;
+  z-index: -1;
 }
 </style>

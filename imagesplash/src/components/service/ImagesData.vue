@@ -16,6 +16,7 @@
           <p>{{ imgs.author }}</p>
         </div>
         <div class="casulo progressive">
+          <pre-loader></pre-loader>
           <img
             class="preview"
             v-progressive="imgs.download_url"
@@ -60,6 +61,8 @@
           <p>{{ items.author }}</p>
         </div>
         <div class="casulo progressive">
+          <pre-loader></pre-loader>
+
           <img
             class="preview"
             :src="items.download_url"
@@ -90,8 +93,9 @@
 </template>
 <script>
 import axios from "axios";
-
+import PreLoader from "../pre-loader/PreLoader.vue";
 export default {
+  components: { PreLoader },
   props: ["filteredArr", "arr"],
   data() {
     return {
@@ -136,6 +140,18 @@ export default {
 </script>
 
 <style scoped>
+.pre-loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: #fff;
+  z-index: -1;
+}
 .fa-arrow-down {
   color: rgb(78, 78, 78);
   position: absolute;
