@@ -4,3 +4,10 @@
 Projeto desenvolvido com o framework VueJs usando a API https://picsum.photos/images.
 
 O Website contém uma barra de pesquisa que busca as imagens baseado no nome do autor.
+
+## Tecnologias utilizadas
+<li>Javascript</li>
+<li>Bootstrap</li>
+<li>Vue.JS</li>
+<li>Node.JS</li>
+
